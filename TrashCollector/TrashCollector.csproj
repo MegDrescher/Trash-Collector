@@ -184,6 +184,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerProfileMode.cs" />
+    <Compile Include="Models\DayTime.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
