@@ -24,7 +24,7 @@ namespace TrashCollector.Models
 
 
 
-        [ForeignKey("Zipcode")]
+        //[ForeignKey("ZipcodeId")]
         //[Display(zipcode ="Zip Code")]
         public int? ZipcodeId { get; set; }
         public Zipcode zipcode { get; set; }

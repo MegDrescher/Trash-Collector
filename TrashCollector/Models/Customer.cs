@@ -24,33 +24,33 @@ namespace TrashCollector.Models
         //public string PhoneNumber { get; set; }
         public string Address { get; set; }
 
-        [ForeignKey("City")]
+        [ForeignKey("city")]
 
         public int? CityId { get; set; }
         public City city { get; set; }
 
-        [ForeignKey("State")]
-
+        [ForeignKey("state")]
         public int? StateId { get; set; }
         public State state { get; set; }
         public string State { get; set; }
 
-        [ForeignKey("Zipcode")]
-        //[Display(zipcode ="Zip Code")]
+        [ForeignKey("ZipcodeId")]
+        //[Display(ZipCode ="zipcode")
         public int? ZipcodeId { get; set; }
         public Zipcode zipcode { get; set; }
 
-        [ForeignKey("Residence")]
+        [ForeignKey("residence")]
         public int? ResidenceTypeId { get; set; }
         public Residence residence { get; set; }
 
         public double? latitude { get; set; }
         public double? longitude { get; set; }
+        
 
-        [ForeignKey("PickUpDay")]
         [Display(Name = "Pick Up Day")]
         public int? PickUpDayId { get; set; }
-        [ForeignKey ("ExtraPickUpDay")]
+
+        
         [Display(Name ="Requested Extra Pick Up Day")]
         public int? ExtraRequestedDayId { get; set; }
         
