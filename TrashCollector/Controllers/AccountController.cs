@@ -177,7 +177,7 @@ namespace TrashCollector.Controllers
                     }               
                 }
 
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Conmtains("Admin")).ToList(), "Name", "Name");
+                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
                 AddErrors(result);
             }
 

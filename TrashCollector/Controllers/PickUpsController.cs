@@ -179,10 +179,13 @@ namespace TrashCollector.Controllers
 
                 PickupDayViewModel pdvm = new PickupDayViewModel();
 
-                List<Models.PickupDayViewModel> Listdaything = PickupSameDay.ToList();
+                List<Pickup> Listdaything = PickupDayViewModel.ToList();
+                return View(Listdaything);
             }
+            return RedirectToAction("Index", "Pickups");
         }
         public ActionResult AdjustBalance(int? id)
+            //Adjust and Update the customer's balance
         {
             Customer customer = db.Customers.Find(id);
             customer.PickupStatus = true;
@@ -203,6 +206,11 @@ namespace TrashCollector.Controllers
         public class PickupDayViewModel
         {
             public object DaySearch { get; internal set; }
+
+            internal static List<Pickup> ToList()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 
