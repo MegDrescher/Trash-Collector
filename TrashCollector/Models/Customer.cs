@@ -34,8 +34,8 @@ namespace TrashCollector.Models
         public State state { get; set; }
         public string State { get; set; }
 
-        [ForeignKey("ZipcodeId")]
-        //[Display(ZipCode ="zipcode")
+        //[ForeignKey("ZipcodeId")]
+       // [Display(zipcode ="zipcode")]
         public int? ZipcodeId { get; set; }
         public Zipcode zipcode { get; set; }
 
@@ -65,21 +65,12 @@ namespace TrashCollector.Models
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public IEnumerable<Residence> Residences { get; set; }
-        //public IEnumerable<DayTime> DayTimes { get; set; }
+        public IEnumerable<DayTime> DayTimes { get; set; }
         public IEnumerable<Zipcode> ZipCode { get; set; }
         public IEnumerable<City> Cities { get; set; }   
         public IEnumerable<State> States { get; set; }
         public IEnumerable <PickupDay> PickUpDays { get; set; }
-
-
-        
-
-
-        
-       
-
-
-
-
+        public string AppUserID { get; internal set; }
+        public object CustomerID { get; internal set; }
     }
 }

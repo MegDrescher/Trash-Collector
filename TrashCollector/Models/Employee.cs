@@ -34,6 +34,7 @@ namespace TrashCollector.Models
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+        public string AppUserID { get; internal set; }
     }
 
 }

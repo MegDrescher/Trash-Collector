@@ -11,5 +11,6 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
         public string PickUpDay { get; set; }
+        public object CustomerID { get; internal set; }
     }
 }
