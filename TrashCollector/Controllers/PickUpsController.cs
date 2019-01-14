@@ -13,12 +13,14 @@ namespace TrashCollector.Controllers
     public class PickUpsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
+
         // GET: PickUps
         public ActionResult Index()
         {
             string customer = User.Identity.GetUserId();
             var pickupcustomer = db.Customers.Where(c => c.AppUserID == customer).Single();
-            List<Models.PickupDayViewModel> pickupsInZipCode = db.Pickups.Where((object p) => p.CustomerID == pickupscustomer.CustomerID).ToList();
+            List<Models.PickupDayViewModel> pickupsInZipCode = db.Pickups.Where((object p) => p.CustomerID == pickupcustomer.CustomerID).ToList();
             return View(pickupsInZipCode);
         }
 
@@ -29,7 +31,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.PickupDayViewModel pickup = db.Pickups.Find(id);
+            Models.PickupDayViewModel pickup = db.pickups.Find(id);
             if (pickup == null)
             {
                 return HttpNotFound();
@@ -70,7 +72,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.PickupDayViewModel pickup = db.Pickups.Find(id);
+            Models.PickupDayViewModel pickup = db.pickups.Find(id);
             if (pickup == null)
             {
                 return HttpNotFound();
@@ -86,7 +88,7 @@ namespace TrashCollector.Controllers
         {
             string AppCutID = User.Identity.GetUserId();
             var pickupcustomer = db.Customers.Where(s => s.AppUserID == AppCutID).Single();
-            Models.PickupDayViewModel pickupToEdit = db.Pickups.Where((object p) => p.CustomerID == pickupcustomer.CustomerID).Single();
+            Models.PickupDayViewModel pickupToEdit = db.pickups.Where((object p) => p.CustomerID == pickupcustomer.CustomerID).Single();
             db.SaveChanges();
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "PickupDay", pickup.CustomerID);
             return View(pickup);
@@ -100,7 +102,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.PickupDayViewModel pickup = db.Pickups.Find(id);
+            Models.PickupDayViewModel pickup = db.pickups.Find(id);
             if (pickup == null)
             {
                 return HttpNotFound();
@@ -113,8 +115,8 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.PickupDayViewModel pickup = db.Pickups.Find(id);
-            db.Pickups.Remove(pickup);
+            Models.PickupDayViewModel pickup = db.pickups.Find(id);
+            db.pickups.Remove(pickup);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -130,7 +132,7 @@ namespace TrashCollector.Controllers
             var employee = db.Employee.Where(e => e.AppUserID == employeeId).FirstOrDefault();
 
             PickupDayViewModel pvdm = new PickupDayViewModel();
-            var pickups = db.Pickups;
+            var pickups = db.pickups;
 
             var daything = pickups.ToList();
             foreach (var item in daything)
@@ -166,7 +168,7 @@ namespace TrashCollector.Controllers
 
             if(model.DaySearch = null)
             {
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else
             {
@@ -182,7 +184,6 @@ namespace TrashCollector.Controllers
                 List<Pickup> Listdaything = PickupDayViewModel.ToList();
                 return View(Listdaything);
             }
-            return RedirectToAction("Index", "Pickups");
         }
         public ActionResult AdjustBalance(int? id)
             //Adjust and Update the customer's balance
@@ -212,9 +213,7 @@ namespace TrashCollector.Controllers
                 throw new NotImplementedException();
             }
         }
-    }
-
-   
+    }  
 }
 
 

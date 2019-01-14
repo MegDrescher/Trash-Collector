@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -41,7 +42,8 @@ namespace TrashCollector.Models
         public DbSet<TodaysPickup> TodaysPickup { get; set; }
 
         public DbSet<RunUpdate> RunUpdates{ get; set; }
-        public object Pickups { get; internal set; }
+        public object pickups { get; internal set; }
         public object Employee { get; internal set; }
+        public IEnumerable<object> Pickups { get; internal set; }
     }
 }
