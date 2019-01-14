@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PickUpsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -198,7 +199,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Payment.cs" />
-    <Compile Include="Models\PickupDay.cs" />
+    <Compile Include="Models\Pickup.cs" />
+    <Compile Include="Models\PickupDayViewModel.cs" />
     <Compile Include="Models\Residence.cs" />
     <Compile Include="Models\RunUpdate.cs" />
     <Compile Include="Models\State.cs" />
@@ -272,6 +274,7 @@
     <Folder Include="Views\PickUps\" />
     <Folder Include="Views\Role\" />
     <Folder Include="Views\Shared\Index\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

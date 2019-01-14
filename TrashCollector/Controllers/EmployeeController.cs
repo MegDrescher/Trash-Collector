@@ -106,8 +106,8 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EmployeeController employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            Employee Employee = db.Employees.Find(id);
+            db.Employees.Remove(Employee);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

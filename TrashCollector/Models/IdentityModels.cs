@@ -37,10 +37,11 @@ namespace TrashCollector.Models
         public DbSet<State> States { get; set; }
         public DbSet<Zipcode> Zipcodes { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<PickupDay> PickupDays{ get; set; }
+        public DbSet<PickupDayViewModel> PickupDays{ get; set; }
         public DbSet<TodaysPickup> TodaysPickup { get; set; }
 
         public DbSet<RunUpdate> RunUpdates{ get; set; }
         public object Pickups { get; internal set; }
+        public object Employee { get; internal set; }
     }
 }

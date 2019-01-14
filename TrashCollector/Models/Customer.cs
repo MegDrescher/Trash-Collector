@@ -54,7 +54,7 @@ namespace TrashCollector.Models
         [Display(Name ="Requested Extra Pick Up Day")]
         public int? ExtraRequestedDayId { get; set; }
         
-        public PickupDay ExtraPickUpDay { get; set; }
+        public PickupDayViewModel ExtraPickUpDay { get; set; }
         [DisplayFormat(DataFormatString = "{0:0.###}")]
         public double? amountDue { get; set; }
         public DateTime DueDate { get; set; }
@@ -69,8 +69,10 @@ namespace TrashCollector.Models
         public IEnumerable<Zipcode> ZipCode { get; set; }
         public IEnumerable<City> Cities { get; set; }   
         public IEnumerable<State> States { get; set; }
-        public IEnumerable <PickupDay> PickUpDays { get; set; }
+        public IEnumerable <PickupDayViewModel> PickUpDays { get; set; }
         public string AppUserID { get; internal set; }
         public object CustomerID { get; internal set; }
+        public bool PickupStatus { get; internal set; }
+        public int BalanceDue { get; internal set; }
     }
 }
