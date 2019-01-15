@@ -11,23 +11,25 @@ namespace TrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Name")]
+        public object EmployeeID { get; set; }
+
+        [Display(Name = " First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        public string UserName { get; set; }
-        [Display(Name = "User Name")]
-        public string Email { get; set; }
-        public DateTime DOB { get; set; }
-        public string PhoneNumber { get; set; }
-        [Display(Name ="Phone Number")]
 
-       // public IEnumerable<Zipcode> ZipCode { get; set; }
+        //public DateTime DOB { get; set; }
+        [ForeignKey("Phone Number")]
+        public string PhoneNumber { get; set; }
+        [Display(Name = "Phone Number")]
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
+        public string UserName { get; set; }
+        [Display(Name = "User Name")]
         public ApplicationUser ApplicationUser { get; set; }
         public string AppUserID { get; internal set; }
-    }
 
+    }
 }
+

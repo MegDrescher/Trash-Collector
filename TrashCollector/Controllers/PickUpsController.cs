@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
         // GET: PickUps/Details/5
         public ActionResult Details(int? id)
         {
-           
+            return View();
         }
 
         // GET: PickUps/Create
@@ -39,6 +39,7 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PickupId,PickupDay,VacationStart,VacationEnd,ExtraPickUpDay")] Models.PickupDayViewModel pickup)
         {
+            
             string AppCutID = User.Identity.GetUserId();
             var pickupcustomer = db.Customers.Where(s => s.AppUserID == AppCutID).Single();
             pickup.CustomerID = pickupcustomer.CustomerID;
@@ -47,7 +48,7 @@ namespace TrashCollector.Controllers
             {
                 db.PickupDays.Add(pickup);
                 db.SaveChanges();
-                return RedirectToAction("Idex");
+                return RedirectToAction("Index");
             }
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Address", pickup.CustomerID);
             return View(pickup);
@@ -113,7 +114,7 @@ namespace TrashCollector.Controllers
         [AllowAnonymous]
         public ActionResult PickupByDay()
         {
-            
+            return View();
         }
         public ActionResult AdjustBalance(int? id)
             //Adjust and Update the customer's balance
