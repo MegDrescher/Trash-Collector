@@ -135,17 +135,14 @@ namespace TrashCollector.Controllers
                     return View(model);
             }
         }
-
-        //
+      
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin").ToList(), "Name", "Name"));
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
             return View();
-        }
-
-        //
+        }     
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]

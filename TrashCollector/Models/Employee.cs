@@ -18,18 +18,11 @@ namespace TrashCollector.Models
         public string UserName { get; set; }
         [Display(Name = "User Name")]
         public string Email { get; set; }
-        public DayTime DOB { get; set; }
+        public DateTime DOB { get; set; }
         public string PhoneNumber { get; set; }
         [Display(Name ="Phone Number")]
 
-
-
-        //[ForeignKey("ZipcodeId")]
-        //[Display(zipcode ="Zip Code")]
-        public int? ZipcodeId { get; set; }
-        public Zipcode zipcode { get; set; }
-
-        public IEnumerable<Zipcode> ZipCode { get; set; }
+       // public IEnumerable<Zipcode> ZipCode { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }

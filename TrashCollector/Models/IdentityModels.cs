@@ -33,15 +33,9 @@ namespace TrashCollector.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Residence> Residences { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<State> States { get; set; }
-        public DbSet<Zipcode> Zipcodes { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<PickupDayViewModel> PickupDays{ get; set; }
-        public DbSet<TodaysPickup> TodaysPickup { get; set; }
+       
 
-        public DbSet<RunUpdate> RunUpdates{ get; set; }
+       
         public object pickups { get; internal set; }
         public object Employee { get; internal set; }
         public IEnumerable<object> Pickups { get; internal set; }

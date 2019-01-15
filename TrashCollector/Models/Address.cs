@@ -5,7 +5,8 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class CustomerProfileMode
+    public class Address
     {
+
     }
 }
