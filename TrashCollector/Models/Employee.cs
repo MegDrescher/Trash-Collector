@@ -10,25 +10,28 @@ namespace TrashCollector.Models
     public class Employee
     {
         [Key]
-        public int Id { get; set; }
-        public object EmployeeID { get; set; }
+        public int EmployeeId { get; set; }
+        public string EmployeeZip { get; set; }
 
-        [Display(Name = " First Name")]
-        public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; } 
 
-        //public DateTime DOB { get; set; }
+        [Display(Name ="Today's Pickup")]
+        public string TodaysPickup { get; set; }
+        [Display(Name = "Confirm Pickup")]
+        public string ConfirmPickup { get; set; }
+
         [ForeignKey("Phone Number")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Phone Number")]
+        //public DateTime DOB { get; set; }
+        
+        public IEnumerable<Customer> Customers { get; set; }
 
+        [Display(Name = "Select Employee or Customer")]
         [ForeignKey("ApplicationUser")]
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        [Display(Name = "User Name")]
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        public string AppUserID { get; internal set; }
 
     }
 }

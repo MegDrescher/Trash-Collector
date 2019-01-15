@@ -13,22 +13,17 @@ namespace TrashCollector.Models
         [Key]
 
         public int PickupId { get; set; }
+
         public string PickupDay { get; set; }
-
-        [DisplayName("Vacation Start Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:dd/MM/yyyy}")]
-        public System.DateTime? VacationStart { get; set; }
-
-        [DisplayName ("Vacation End Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public System.DateTime? VacationEnd { get; set; }
-
-        [DisplayName("Extra Pickup Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public System.DateTime? ExtraPickup { get; set; }
-
+        public string CustomPickup { get; set; }
+    
         [ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
+        [ForeignKey("Employee")]
+        public int EmployeeID { get; set; }
+        public Employee Employee { get; set; }
+
+        public bool ConfirmPickup { get; set; }
     }
 }
