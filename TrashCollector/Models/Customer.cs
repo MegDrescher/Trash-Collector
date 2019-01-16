@@ -23,10 +23,11 @@ namespace TrashCollector.Models
         public string City { get; set; }
         public string State { get; set; }
 
-        [Display(Name ="ZipCode")]
-        [ForeignKey("ZipCode")]
+        [Display(Name ="Zip Code")]
+        //[ForeignKey("ZipCode")]
         public string ZipCode { get; set; }
         public string CustomerZip { get; set; }
+        
 
         [Display(Name = "Select Employee or Customer")]
         [ForeignKey("ApplicationUser")]

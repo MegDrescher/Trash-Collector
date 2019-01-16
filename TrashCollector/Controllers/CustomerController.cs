@@ -49,6 +49,7 @@ namespace TrashCollector.Controllers
         {
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole");
             return View();
+            //return View(pickup)
         }
 
         // POST: Customer/Create

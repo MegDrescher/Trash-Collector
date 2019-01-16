@@ -22,7 +22,7 @@ namespace TrashCollector.Models
         [Display(Name = "Was the trash picked up?")]
         public bool PickupComplete { get; set; }
 
-        [ForeignKey("Phone Number")]
+        //[ForeignKey("Phone Number")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Phone Number")]
         //public DateTime DOB { get; set; }
