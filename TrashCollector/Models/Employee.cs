@@ -18,8 +18,9 @@ namespace TrashCollector.Models
 
         [Display(Name ="Today's Pickup")]
         public string TodaysPickup { get; set; }
-        [Display(Name = "Confirm Pickup")]
-        public string ConfirmPickup { get; set; }
+
+        [Display(Name = "Was the trash picked up?")]
+        public bool PickupComplete { get; set; }
 
         [ForeignKey("Phone Number")]
         public string PhoneNumber { get; set; }

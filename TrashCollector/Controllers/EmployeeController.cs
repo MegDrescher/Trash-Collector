@@ -16,27 +16,42 @@ namespace TrashCollector.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            var currentUserId = User.Identity.GetUserId();
+            var day = DateTime.Today.DayOfWeek;
+            string stringDay = day.ToString();
+            var employees = db.Employees.Include(e => e.ApplicationUser);
+            //var CustomerList = db.Customers.Where(c => c. CustomerZip == Employee.EmployeeZip && (d.DayOfWeek == stringDay || d.CustomPickup));
+            //var employee = (CustomerList);
+            return View();
         }
 
         // GET: Employee/Details/5
         public ActionResult Details(int? id)
         {
+            Customer customer = null;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var FoundUserId = User.Identity.GetUserId();
+                customer = db.Customers.Where(c => c.ApplicationUserId == FoundUserId).FirstOrDefault();
+                return View(customer);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+
+            else
+            {
+                customer = db.Customers.Find(id);
+            }
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(customer);
+        
         }
 
         // GET: Employee/Create
         public ActionResult Create()
         {
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole");
             return View();
         }
 
@@ -45,13 +60,16 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeId,AppUserID,ZipCode")] Employee employee)
         {
-            employee.AppUserID = User.Identity.GetUserId();
+            
             if (ModelState.IsValid)
             {
+                employee.ApplicationUserId = User.Identity.GetUserId();
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("PickupsByDate", "Pickups");
+                return RedirectToAction("Index");
             }
+
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", employee.ApplicationUserId);
             return View(employee);
         }
 
@@ -67,24 +85,52 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View();
         }
-
 
         // POST: Employee/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,AppUserID,ZipCode")] Employee employee)
+        public ActionResult Edit([Bind(Include = "CustomerId,Name,CustomerZip,Address,PickupStartDate,PickupEndDate,DayOfWeek,ApplicationUserId")] Customer customer)       
         {
+            if (customer.PickupComplete == true)
+            {
+                customer.BillAmount = customer.BillAmount + 30;
+                db.SaveChanges();
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                var customerInDb = db.Customers.Where(x => x.CustomerId == customer.CustomerId).Single();
+
+                //db.Entry(customer).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employee);
+
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", customer.ApplicationUserId);
+            return View(customer);
         }
 
+        public ActionResult Map(int? id)
+        {
+            {
+                if(id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Customer customer = db.Customers.Find(id);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", customer.ApplicationUserId);
+                ViewBag.CustomerAddress = customer.Address;
+                ViewBag.CustomerZip = customer.CustomerZip;
+
+                return View(customer);
+            }
+        }
         // GET: Employee/Delete/5
         public ActionResult Delete(int? id)
         {

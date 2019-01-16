@@ -17,24 +17,16 @@ namespace TrashCollector.Models
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Display(Name = "Email Address")]
-        public string Email { get; set; }
+        [Display(Name ="Address")]
+        public string Address { get; set; }
+        public string StreetName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
 
-        [ForeignKey("Phone Number")]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-   
-        [Display(Name = "Was the trash picked up?")]
-        public bool PickupComplete { get; set; }
-
-        [Display(Name = "Pick Up Day Request: Enter your preferred scheduled start date.")]
-        public string PickUpStartDate { get; set; }
-
-        [Display(Name = "Pick Up Day Request: Enter your preferred scheduled end date.")]
-        public string PickUpEndDate { get; set; }
-
-        [Display(Name ="Schedule Extra Pick Up Day Request: Enter one extra day you'd like to schedule your pick up.")]
-        public string CustomPickup { get; set; }
+        [Display(Name ="ZipCode")]
+        [ForeignKey("ZipCode")]
+        public string ZipCode { get; set; }
+        public string CustomerZip { get; set; }
 
         [Display(Name = "Select Employee or Customer")]
         [ForeignKey("ApplicationUser")]
@@ -43,6 +35,10 @@ namespace TrashCollector.Models
 
         [Display(Name = "Customer Bill Amount Due")]
         public double BillAmount { get; set; }
+        public bool PickupComplete { get; internal set; }
+        public bool PickupStatus { get; set; }
+        public double BalanceDue { get; set; }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -33,11 +34,7 @@ namespace TrashCollector.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-       
 
-       
-        public object pickups { get; internal set; }
-        public object Employee { get; internal set; }
-        public IEnumerable<object> Pickups { get; internal set; }
+        public DbSet<Pickup> Pickup { get; set; }
     }
 }

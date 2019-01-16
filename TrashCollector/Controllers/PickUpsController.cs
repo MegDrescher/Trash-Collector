@@ -37,16 +37,16 @@ namespace TrashCollector.Controllers
         // POST: PickUps/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PickupId,PickupDay,VacationStart,VacationEnd,ExtraPickUpDay")] Models.PickupDayViewModel pickup)
+        public ActionResult Create([Bind(Include = "PickupId,PickupDay,VacationStart,VacationEnd,ExtraPickUpDay")] Pickup pickup)
         {
             
             string AppCutID = User.Identity.GetUserId();
-            var pickupcustomer = db.Customers.Where(s => s.AppUserID == AppCutID).Single();
-            pickup.CustomerID = pickupcustomer.CustomerID;
+            var pickupcustomer = db.Customers.Where(s => s.ApplicationUserId == AppCutID).Single();
+            pickup.CustomerID = pickupcustomer.CustomerId;
 
             if (ModelState.IsValid)
             {
-                db.PickupDays.Add(pickup);
+                db.Pickup.Add(pickup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -61,7 +61,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.PickupDayViewModel pickup = db.pickups.Find(id);
+            Pickup pickup = db.Pickup.Find(id);
             if (pickup == null)
             {
                 return HttpNotFound();
@@ -76,8 +76,8 @@ namespace TrashCollector.Controllers
         public ActionResult Edit([Bind(Include = "PickupId,PickupDay, VacationStart,VacationEnd,ExtraPickup")] Models.Pickup pickup)
         {
             string AppCutID = User.Identity.GetUserId();
-            var pickupcustomer = db.Customers.Where(s => s.AppUserID == AppCutID).Single();
-            Models.Pickup pickupToEdit = db.pickup.Where((object p) => p.CustomerID == pickupcustomer.CustomerID).Single();
+            var pickupcustomer = db.Customers.Where(s => s.ApplicationUserId == AppCutID).Single();
+            Models.Pickup pickupToEdit = db.Pickup.Where(p => p.CustomerID == pickupcustomer.CustomerId).Single();
             db.SaveChanges();
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "PickupDay", pickup.CustomerID);
             return View(pickup);
@@ -91,7 +91,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.PickupDayViewModel pickup = db.pickups.Find(id);
+            Pickup pickup = db.Pickup.Find(id);
             if (pickup == null)
             {
                 return HttpNotFound();
@@ -104,8 +104,8 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.PickupDayViewModel pickup = db.pickups.Find(id);
-            db.pickups.Remove(pickup);
+            var Pickup = db.Pickup.Where(x => x.PickupId == id).Select(x => x).FirstOrDefault();
+            db.Pickup.Remove(Pickup);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -118,10 +118,10 @@ namespace TrashCollector.Controllers
         }
         public ActionResult AdjustBalance(int? id)
             //Adjust and Update the customer's balance
-        {
+           {
             Customer customer = db.Customers.Find(id);
-            customer.PickupStatus = true;
-            customer.BalanceDue += 30;
+            customer.PickupStatus = true;          
+            customer.BalanceDue = 30;
             db.SaveChanges();
             return RedirectToAction("PickupsByDay", "Pickups");   
         }

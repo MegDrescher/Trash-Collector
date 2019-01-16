@@ -12,33 +12,42 @@ namespace TrashCollector.Controllers
 {
     public class CustomerController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Customer
         public ActionResult Index()
         {
-            string customer = User.Identity.GetUserId();
-            List<Customer> newcustomer = db.Customers.Where(c => c.AppUserID == customer).ToList();
-            return View(newcustomer);
+            var FoundUserId = User.Identity.GetUserId();
+            var customer = db.Customers.Where(c => c.ApplicationUserId == FoundUserId).FirstOrDefault();
+            var customers = db.Customers.Include(c => c.ApplicationUser);
+            return View(customer);         
         }
 
         // GET: Customer/Details/5
         public ActionResult Details(int? id)
         {
+            Customer customer = null;
             if(id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var FoundUserId = User.Identity.GetUserId();
+                customer = db.Customers.Where(c => c.ApplicationUserId == FoundUserId).FirstOrDefault();
+                return View(customer);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+
+            else
+            {
+                customer = db.Customers.Find(id);
+            }
+            if(customer == null)
             {
                 return HttpNotFound();
             }
-            return View();
+            return View(customer);
         }
 
         // GET: Customer/Create
         public ActionResult Create()
         {
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole");
             return View();
         }
 
@@ -47,17 +56,22 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include ="CustomerID,Address,ZipCode,AppUserID")]Customer customer)
         {
-            customer.AppUserID = User.Identity.GetUserId();
+            var errors = ModelState
+            .Where(x => x.Value.Errors.Count > 0)
+            .Select(x => new { x.Key, x.Value.Errors })
+            .ToArray();
+           
             if (ModelState.IsValid)
             {
+                customer.ApplicationUserId = User.Identity.GetUserId();
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Pickups");
+                return RedirectToAction("Index");
             }
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole",customer.ApplicationUserId);
             return View(customer);
         }
         
-
         // GET: Customer/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -70,6 +84,8 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", customer.ApplicationUserId);
             return View(customer);
         }
 
@@ -82,10 +98,11 @@ namespace TrashCollector.Controllers
             
             {
                 // TODO: Add update logic here
-                db.Entry(customer).State = EntityState.Modified;
+               db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");             
             }
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "UserRole", customer.ApplicationUserId);
             return View(customer);        
         }
 
