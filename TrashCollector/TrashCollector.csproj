@@ -255,12 +255,24 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Create.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Details.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\PickUps\Index.cshtml" />
+    <Content Include="Views\PickUps\Details.cshtml" />
+    <Content Include="Views\PickUps\Create.cshtml" />
+    <Content Include="Views\PickUps\Edit.cshtml" />
+    <Content Include="Views\PickUps\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Employee\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Employee\" />
-    <Folder Include="Views\PickUps\" />
     <Folder Include="Views\Role\" />
     <Folder Include="Views\Shared\Index\" />
     <Folder Include="Views\User\" />

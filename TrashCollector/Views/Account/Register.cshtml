@@ -30,12 +30,20 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(m => m.UserRoles, "Employee", new { @class = "radio-inline" })@Html.Label("Employee")
+            @Html.RadioButtonFor(m => m.UserRoles, "Customer", new { @class = "radio-inline" })@Html.Label("Customer")
         </div>
     </div>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-default" value="Register" />
+          </div>
+    </div>
+  }
+      @section Scripts {
+          @Scripts.Render("~/bundles/jqueryval")
+      }
+  }

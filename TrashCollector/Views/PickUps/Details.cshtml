@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TrashCollector.Models.Pickup>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PickupDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomPickup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfirmPickup)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickupDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickUpStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickUpEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomPickup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmPickup)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PickupId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PickupId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PickupId })
+        </td>
+    </tr>
+}
+
+</table>
